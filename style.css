@@ -1,0 +1,260 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #111;
+  --card-bg: #1c1c1c;
+  --card-revealed: #232323;
+  --border: #2a2a2a;
+  --text: #e8e8e8;
+  --muted: #555;
+  --gold: #c8a84b;
+  --gold-dim: #7a6228;
+  --answer-bg: #1e1a0d;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* ── SCREENS ─────────────────────────────── */
+.screen { display: none; flex-direction: column; height: 100dvh; height: 100vh; }
+.screen.active { display: flex; }
+
+/* ── CATEGORY SCREEN ─────────────────────── */
+.cat-header {
+  padding: 44px 24px 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.cat-header h1 {
+  font-size: 1.8rem;
+  letter-spacing: .35em;
+  color: var(--gold);
+  font-weight: 700;
+}
+.cat-header p {
+  color: var(--muted);
+  font-size: .8rem;
+  letter-spacing: .12em;
+  margin-top: 6px;
+}
+
+.cat-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px 12px;
+  flex-shrink: 0;
+}
+.btn-small {
+  flex: 1;
+  padding: 8px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 6px;
+  font-size: .75rem;
+  letter-spacing: .1em;
+  cursor: pointer;
+}
+.btn-small:active { background: #222; }
+
+.cat-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cat-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  margin-bottom: 6px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .15s;
+}
+.cat-item:active { background: #252525; }
+
+.cat-icon { font-size: 1.4rem; margin-right: 14px; flex-shrink: 0; }
+.cat-name { flex: 1; font-size: .95rem; letter-spacing: .04em; }
+.cat-count { font-size: .7rem; color: var(--muted); margin-right: 12px; }
+
+.cat-check {
+  width: 22px; height: 22px;
+  border: 2px solid var(--muted);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.cat-check.on { background: var(--gold); border-color: var(--gold); }
+.cat-check.on::after { content: '✓'; color: #000; font-weight: 700; font-size: 13px; }
+
+.cat-footer { padding: 14px 16px 28px; flex-shrink: 0; }
+.btn-primary {
+  width: 100%; padding: 16px;
+  background: var(--gold); color: #000;
+  border: none; border-radius: 8px;
+  font-size: .95rem; font-weight: 700;
+  letter-spacing: .25em; cursor: pointer;
+  transition: opacity .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-primary:active { opacity: .75; }
+.btn-primary:disabled { opacity: .35; cursor: default; }
+
+/* ── GAME SCREEN ─────────────────────────── */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.btn-icon {
+  background: none; border: none;
+  color: var(--text); font-size: 1.3rem;
+  padding: 6px 10px; cursor: pointer;
+  border-radius: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-icon:active { background: #252525; }
+
+.counter { color: var(--muted); font-size: .8rem; letter-spacing: .12em; }
+.cat-badge {
+  font-size: .65rem; color: var(--muted);
+  letter-spacing: .08em;
+  max-width: 120px; text-align: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.game-board {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  gap: 8px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── QUESTION CARD ───────────────────────── */
+.card-q {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  min-height: 110px;
+  flex-shrink: 0;
+}
+.card-q-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 14px 10px;
+  font-size: .6rem;
+  letter-spacing: .35em;
+  color: var(--muted);
+  background: #161616;
+  border-right: 1px solid var(--border);
+  border-radius: 8px 0 0 8px;
+  flex-shrink: 0;
+}
+.card-q-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 16px;
+  font-size: 1rem;
+  line-height: 1.55;
+  text-align: center;
+  color: var(--text);
+}
+
+/* ── REVEAL CARDS ────────────────────────── */
+.card-r {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  min-height: 82px;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .25s, border-color .25s;
+}
+.card-r:active { opacity: .85; }
+
+.card-r-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .78rem;
+  letter-spacing: .45em;
+  color: var(--muted);
+  transition: opacity .25s;
+  pointer-events: none;
+  font-weight: 500;
+}
+
+.card-r-content {
+  opacity: 0;
+  padding: 18px 20px;
+  font-size: .92rem;
+  line-height: 1.55;
+  text-align: center;
+  color: var(--text);
+  transition: opacity .3s;
+  pointer-events: none;
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-r.open { background: var(--card-revealed); }
+.card-r.open .card-r-label { opacity: 0; }
+.card-r.open .card-r-content { opacity: 1; }
+
+.card-r.answer.open {
+  background: var(--answer-bg);
+  border-color: var(--gold-dim);
+}
+.card-r.answer.open .card-r-content {
+  color: var(--gold);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* tap hint on closed cards */
+.card-r:not(.open)::after {
+  content: '▼';
+  position: absolute;
+  bottom: 6px; right: 10px;
+  font-size: .55rem;
+  color: var(--border);
+  pointer-events: none;
+}
+
+.game-footer { padding: 12px 12px 24px; flex-shrink: 0; }
+
+/* ── NO QUESTIONS ────────────────────────── */
+.empty-state {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px; padding: 32px; text-align: center;
+}
+.empty-state h2 { color: var(--muted); font-size: 1rem; letter-spacing: .1em; }
+.empty-state p { color: var(--muted); font-size: .8rem; }

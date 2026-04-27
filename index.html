@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#111111">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Quizpoker</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── KATEGORIE-AUSWAHL ─────────────────────── -->
+  <div id="screen-cat" class="screen active">
+    <div class="cat-header">
+      <h1>QUIZPOKER</h1>
+      <p>KATEGORIEN AUSWÄHLEN</p>
+    </div>
+
+    <div class="cat-actions">
+      <button class="btn-small" id="btn-all">ALLE AN</button>
+      <button class="btn-small" id="btn-none">ALLE AUS</button>
+    </div>
+
+    <div class="cat-list" id="cat-list"></div>
+
+    <div class="cat-footer">
+      <button class="btn-primary" id="btn-start">SPIEL STARTEN</button>
+    </div>
+  </div>
+
+  <!-- ── SPIELSCREEN ───────────────────────────── -->
+  <div id="screen-game" class="screen">
+    <div class="game-header">
+      <button class="btn-icon" id="btn-back">←</button>
+      <div style="text-align:center">
+        <div class="counter" id="counter">1 / 100</div>
+        <div class="cat-badge" id="cat-badge"></div>
+      </div>
+      <button class="btn-icon" id="btn-skip">→</button>
+    </div>
+
+    <div class="game-board" id="game-board">
+      <!-- Question card -->
+      <div class="card-q">
+        <div class="card-q-label">FRAGE</div>
+        <div class="card-q-text" id="q-text">—</div>
+      </div>
+
+      <!-- Hinweis 1 -->
+      <div class="card-r" id="card-h1">
+        <div class="card-r-label">HINWEIS 1</div>
+        <div class="card-r-content" id="h1-text"></div>
+      </div>
+
+      <!-- Hinweis 2 -->
+      <div class="card-r" id="card-h2">
+        <div class="card-r-label">HINWEIS 2</div>
+        <div class="card-r-content" id="h2-text"></div>
+      </div>
+
+      <!-- Antwort -->
+      <div class="card-r answer" id="card-ans">
+        <div class="card-r-label">ANTWORT</div>
+        <div class="card-r-content" id="ans-text"></div>
+      </div>
+    </div>
+
+    <div class="game-footer">
+      <button class="btn-primary" id="btn-next">NÄCHSTE FRAGE</button>
+    </div>
+  </div>
+
+  <script src="q_geo.js"></script>
+  <script src="q_technik.js"></script>
+  <script src="q_natur.js"></script>
+  <script src="q_geschichte.js"></script>
+  <script src="q_film.js"></script>
+  <script src="q_musik.js"></script>
+  <script src="q_medizin.js"></script>
+  <script src="q_essen.js"></script>
+  <script src="q_sport.js"></script>
+  <script src="q_weltall.js"></script>
+  <script src="q_geld.js"></script>
+  <script src="q_absurd.js"></script>
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
